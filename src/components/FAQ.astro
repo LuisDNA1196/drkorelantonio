@@ -1,0 +1,96 @@
+---
+import { doctor } from "../config/doctor";
+---
+
+<section class="section faq" aria-labelledby="faq-title">
+  <div class="container faq-layout">
+    <div class="faq-intro reveal">
+      <p class="section-label">Preguntas frecuentes</p>
+      <h2 class="section-title" id="faq-title">Resolvemos tus dudas con claridad</h2>
+      <p class="section-copy">Si tu pregunta no aparece aquí, escríbenos. Con gusto te orientamos.</p>
+      <a class="button button-primary" href="#contacto">Hacer otra pregunta</a>
+    </div>
+    <div class="accordion reveal">
+      {doctor.faqs.map((faq, index) => (
+        <details open={index === 0}>
+          <summary><span>{faq.question}</span><i aria-hidden="true">+</i></summary>
+          <p>{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-layout {
+    display: grid;
+    grid-template-columns: .78fr 1.2fr;
+    gap: clamp(50px, 9vw, 120px);
+  }
+
+  .faq-intro {
+    align-self: start;
+    position: sticky;
+    top: 110px;
+  }
+
+  .faq-intro .button {
+    margin-top: 28px;
+  }
+
+  details {
+    border-bottom: 1px solid var(--line);
+  }
+
+  summary {
+    min-height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    color: var(--navy-950);
+    cursor: pointer;
+    list-style: none;
+    font-family: Georgia, serif;
+    font-size: 1.13rem;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary i {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    display: grid;
+    place-items: center;
+    color: var(--teal-600);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    transition: transform 180ms ease;
+  }
+
+  details[open] summary i {
+    transform: rotate(45deg);
+  }
+
+  details p {
+    margin: -4px 48px 28px 0;
+    color: var(--muted);
+    font-size: .94rem;
+  }
+
+  @media (max-width: 780px) {
+    .faq-layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .faq-intro {
+      position: static;
+    }
+  }
+</style>

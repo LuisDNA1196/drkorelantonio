@@ -1,0 +1,103 @@
+---
+import { doctor, whatsappUrl } from "../config/doctor";
+---
+
+<div class="floating-actions">
+  <a class="call" href={`tel:${doctor.phone.replace(/\s/g, "")}`} aria-label="Llamar al consultorio">
+    <span aria-hidden="true">☎</span>
+  </a>
+  <a class="whatsapp" href={whatsappUrl()} target="_blank" rel="noopener" aria-label="Agendar por WhatsApp">
+    <span aria-hidden="true">◉</span><b>WhatsApp</b>
+  </a>
+  <button class="back-top" type="button" aria-label="Volver arriba" data-back-top>↑</button>
+</div>
+
+<style>
+  .floating-actions {
+    position: fixed;
+    z-index: 40;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .call,
+  .whatsapp,
+  .back-top {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border: 0;
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(7,29,47,.2);
+    cursor: pointer;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .call,
+  .back-top {
+    width: 50px;
+    background: var(--navy-900);
+  }
+
+  .call {
+    display: none;
+  }
+
+  .whatsapp {
+    gap: 8px;
+    padding: 0 19px;
+    background: #168a55;
+  }
+
+  .whatsapp b {
+    font-size: .8rem;
+  }
+
+  .back-top {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+  }
+
+  .back-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  a:hover,
+  button:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    .floating-actions {
+      right: 14px;
+      bottom: 14px;
+    }
+
+    .call {
+      display: flex;
+    }
+
+    .whatsapp b {
+      display: none;
+    }
+
+    .whatsapp {
+      width: 50px;
+      padding: 0;
+    }
+  }
+</style>
+
+<script>
+  const backTop = document.querySelector("[data-back-top]");
+  window.addEventListener("scroll", () => backTop?.classList.toggle("visible", window.scrollY > 600), { passive: true });
+  backTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+</script>

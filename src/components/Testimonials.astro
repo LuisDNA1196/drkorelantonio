@@ -1,0 +1,228 @@
+---
+import { getImage } from "astro:assets";
+import { doctor } from "../config/doctor";
+import portraits from "../assets/patient-portraits.png";
+
+const optimizedPortraits = await getImage({
+  src: portraits,
+  width: 1500,
+  format: "webp",
+  quality: 80,
+});
+const portraitsUrl = optimizedPortraits.src;
+---
+
+<section class="section testimonials" id="testimonios" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="testimonials-head reveal">
+      <div>
+        <p class="section-label">Experiencias de pacientes</p>
+        <h2 class="section-title" id="testimonials-title">Confianza que se construye con resultados</h2>
+      </div>
+      <div class="slider-controls">
+        <button type="button" aria-label="Testimonio anterior" data-prev>←</button>
+        <button type="button" aria-label="Testimonio siguiente" data-next>→</button>
+      </div>
+    </div>
+
+    <div class="slider" data-slider>
+      <div class="slider-track" data-track>
+        {doctor.testimonials.map((testimonial, index) => (
+          <article class="testimonial-card" aria-label={`Testimonio ${index + 1} de ${doctor.testimonials.length}`}>
+            <div class={`patient-photo ${testimonial.photoPosition}`} style={`--portraits:url(${portraitsUrl})`} role="img" aria-label={`Fotografía de ${testimonial.name}`}></div>
+            <div class="stars" aria-label={`${testimonial.rating} de 5 estrellas`}>
+              {"★".repeat(testimonial.rating)}
+            </div>
+            <blockquote>“{testimonial.comment}”</blockquote>
+            <footer><b>{testimonial.name}</b><span>{testimonial.treatment}</span></footer>
+          </article>
+        ))}
+      </div>
+      <div class="dots" aria-label="Seleccionar testimonio">
+        {doctor.testimonials.map((_, index) => (
+          <button type="button" class:list={{ active: index === 0 }} aria-label={`Ir al testimonio ${index + 1}`} data-dot={index}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    overflow: hidden;
+    background: var(--sand-100);
+  }
+
+  .testimonials-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 42px;
+  }
+
+  .slider-controls {
+    display: none;
+    gap: 9px;
+  }
+
+  .slider-controls button {
+    width: 48px;
+    height: 48px;
+    color: var(--navy-900);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    transition: color 180ms ease, background 180ms ease;
+  }
+
+  .slider-controls button:hover {
+    color: #fff;
+    background: var(--navy-900);
+  }
+
+  .slider-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    transition: transform 350ms ease;
+  }
+
+  .testimonial-card {
+    padding: 30px;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 14px 44px rgba(7,29,47,.06);
+  }
+
+  .patient-photo {
+    width: 62px;
+    height: 62px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background-image: var(--portraits);
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+
+  .patient-photo.left { background-position: left center; }
+  .patient-photo.center { background-position: center center; }
+  .patient-photo.right { background-position: right center; }
+
+  .stars {
+    margin-top: 24px;
+    color: #d59f38;
+    font-size: .85rem;
+    letter-spacing: .08em;
+  }
+
+  blockquote {
+    min-height: 112px;
+    margin: 14px 0 26px;
+    color: var(--navy-950);
+    font-family: Georgia, serif;
+    font-size: 1.08rem;
+    line-height: 1.6;
+  }
+
+  footer {
+    display: grid;
+    padding-top: 19px;
+    border-top: 1px solid var(--line);
+  }
+
+  footer b {
+    color: var(--navy-950);
+    font-size: .9rem;
+  }
+
+  footer span {
+    color: var(--muted);
+    font-size: .78rem;
+  }
+
+  .dots {
+    display: none;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 99px;
+    background: #bdc8cc;
+    transition: width 180ms ease, background 180ms ease;
+  }
+
+  .dots button.active {
+    width: 24px;
+    background: var(--teal-600);
+  }
+
+  @media (max-width: 760px) {
+    .testimonials-head {
+      align-items: end;
+    }
+
+    .slider {
+      overflow: hidden;
+    }
+
+    .slider-controls {
+      display: flex;
+    }
+
+    .slider-track {
+      display: flex;
+      gap: 0;
+    }
+
+    .testimonial-card {
+      min-width: 100%;
+    }
+
+    .dots {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .slider-controls {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const slider = document.querySelector<HTMLElement>("[data-slider]");
+  const track = slider?.querySelector<HTMLElement>("[data-track]");
+  const cards = slider?.querySelectorAll<HTMLElement>(".testimonial-card");
+  const dots = slider?.querySelectorAll<HTMLButtonElement>("[data-dot]");
+  let current = 0;
+
+  const update = () => {
+    if (!track || window.innerWidth > 760) return;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots?.forEach((dot, index) => dot.classList.toggle("active", index === current));
+  };
+
+  const move = (direction: number) => {
+    if (!cards?.length) return;
+    current = (current + direction + cards.length) % cards.length;
+    update();
+  };
+
+  document.querySelector("[data-prev]")?.addEventListener("click", () => move(-1));
+  document.querySelector("[data-next]")?.addEventListener("click", () => move(1));
+  dots?.forEach((dot) => dot.addEventListener("click", () => {
+    current = Number(dot.dataset.dot);
+    update();
+  }));
+  window.addEventListener("resize", update, { passive: true });
+</script>

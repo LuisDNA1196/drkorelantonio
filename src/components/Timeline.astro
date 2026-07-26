@@ -1,0 +1,145 @@
+---
+const steps = [
+  ["01", "Agenda tu cita", "Elige el canal y horario que prefieras."],
+  ["02", "Valoración", "Revisamos tus síntomas e historia clínica."],
+  ["03", "Diagnóstico", "Te explicamos hallazgos y alternativas."],
+  ["04", "Cirugía", "Procedimiento seguro y planificado contigo."],
+  ["05", "Seguimiento", "Acompañamos de cerca tu recuperación."],
+];
+---
+
+<section class="section process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="process-head reveal">
+      <p class="section-label">Proceso de atención</p>
+      <h2 class="section-title" id="process-title">Un camino claro hacia tu recuperación</h2>
+    </div>
+    <ol class="timeline">
+      {steps.map(([number, title, copy]) => (
+        <li class="reveal">
+          <span class="step-number">{number}</span>
+          <span class="step-dot" aria-hidden="true"></span>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process-head {
+    max-width: 720px;
+    margin: 0 auto 58px;
+    text-align: center;
+  }
+
+  .process-head :global(.section-label) {
+    justify-content: center;
+  }
+
+  .timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline::before {
+    position: absolute;
+    top: 45px;
+    right: 8%;
+    left: 8%;
+    height: 1px;
+    background: var(--line);
+    content: "";
+  }
+
+  li {
+    position: relative;
+    text-align: center;
+  }
+
+  .step-number {
+    display: block;
+    margin-bottom: 15px;
+    color: #98a8b0;
+    font-family: Georgia, serif;
+    font-size: .76rem;
+  }
+
+  .step-dot {
+    position: relative;
+    z-index: 1;
+    width: 17px;
+    height: 17px;
+    display: block;
+    margin: 0 auto 24px;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    outline: 1px solid var(--teal-500);
+    background: var(--teal-600);
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    color: var(--navy-950);
+    font-family: Georgia, serif;
+    font-size: 1.13rem;
+    font-weight: 500;
+  }
+
+  li p {
+    margin: 0;
+    color: var(--muted);
+    font-size: .83rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 760px) {
+    .process-head {
+      margin-bottom: 40px;
+      text-align: left;
+    }
+
+    .process-head :global(.section-label) {
+      justify-content: flex-start;
+    }
+
+    .timeline {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .timeline::before {
+      top: 15px;
+      bottom: 28px;
+      left: 27px;
+      right: auto;
+      width: 1px;
+      height: auto;
+    }
+
+    li {
+      min-height: 125px;
+      padding: 0 0 26px 76px;
+      text-align: left;
+    }
+
+    .step-number {
+      position: absolute;
+      top: 1px;
+      left: 0;
+    }
+
+    .step-dot {
+      position: absolute;
+      top: 5px;
+      left: 19px;
+      margin: 0;
+    }
+  }
+</style>

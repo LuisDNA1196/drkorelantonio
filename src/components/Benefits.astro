@@ -1,0 +1,101 @@
+---
+const benefits = [
+  ["✦", "Atención personalizada", "Cada decisión parte de tu historia, tus dudas y tus necesidades."],
+  ["⌁", "Tecnología moderna", "Herramientas actuales para diagnósticos y procedimientos más precisos."],
+  ["↻", "Seguimiento postoperatorio", "Acompañamiento cercano durante cada etapa de tu recuperación."],
+  ["◎", "Mínima invasión", "Técnicas diseñadas para reducir dolor, cicatrices y tiempo de recuperación."],
+  ["◉", "Diagnóstico oportuno", "Valoración integral para elegir el tratamiento indicado sin demoras."],
+  ["◇", "Comunicación clara", "Explicaciones honestas y sencillas para decidir con tranquilidad."],
+];
+---
+
+<section class="section benefits" aria-labelledby="benefits-title">
+  <div class="container benefits-layout">
+    <div class="benefits-intro reveal">
+      <p class="section-label">¿Por qué elegirme?</p>
+      <h2 class="section-title" id="benefits-title">Tu salud merece certeza, experiencia y cercanía</h2>
+      <p class="section-copy">La excelencia quirúrgica también se construye escuchándote y acompañándote.</p>
+    </div>
+    <div class="benefits-grid">
+      {benefits.map(([icon, title, copy]) => (
+        <article class="benefit reveal">
+          <span aria-hidden="true">{icon}</span>
+          <div><h3>{title}</h3><p>{copy}</p></div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits {
+    color: #fff;
+    background:
+      radial-gradient(circle at 14% 20%, rgba(20,160,155,.17), transparent 30%),
+      var(--navy-950);
+  }
+
+  .benefits-layout {
+    display: grid;
+    grid-template-columns: .8fr 1.25fr;
+    gap: clamp(50px, 8vw, 110px);
+  }
+
+  .benefits :global(.section-title) {
+    color: #fff;
+  }
+
+  .benefits :global(.section-copy) {
+    color: rgba(255,255,255,.62);
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 34px;
+  }
+
+  .benefit {
+    display: flex;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+
+  .benefit > span {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: grid;
+    place-items: center;
+    color: #8be2d7;
+    border: 1px solid rgba(139,226,215,.28);
+    border-radius: 50%;
+  }
+
+  h3 {
+    margin: 0 0 6px;
+    font-family: Georgia, serif;
+    font-size: 1.13rem;
+    font-weight: 500;
+  }
+
+  .benefit p {
+    margin: 0;
+    color: rgba(255,255,255,.58);
+    font-size: .85rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 850px) {
+    .benefits-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

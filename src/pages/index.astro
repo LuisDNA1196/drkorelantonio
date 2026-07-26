@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Services from "../components/Services.astro";
+import Benefits from "../components/Benefits.astro";
+import Timeline from "../components/Timeline.astro";
+import Testimonials from "../components/Testimonials.astro";
+import FAQ from "../components/FAQ.astro";
+import Contact from "../components/Contact.astro";
+import CTA from "../components/CTA.astro";
+import Footer from "../components/Footer.astro";
+import FloatingActions from "../components/FloatingActions.astro";
+---
+
+<BaseLayout>
+  <Navbar />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Benefits />
+    <Timeline />
+    <Testimonials />
+    <FAQ />
+    <Contact />
+    <CTA />
+  </main>
+  <Footer />
+  <FloatingActions />
+</BaseLayout>
+
+<script>
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.14 },
+  );
+
+  document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+</script>

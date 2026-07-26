@@ -1,0 +1,163 @@
+---
+import { doctor } from "../config/doctor";
+---
+
+<footer class="footer" id="aviso-privacidad">
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <span class="mark" aria-hidden="true">K</span>
+      <h2>{doctor.name}</h2>
+      <p>{doctor.specialty}</p>
+      <small>Atención quirúrgica con experiencia, claridad y sentido humano.</small>
+    </div>
+    <div>
+      <h3>Navegación</h3>
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#acerca">Acerca de</a>
+      <a href="#testimonios">Testimonios</a>
+    </div>
+    <div>
+      <h3>Contacto</h3>
+      <a href={`tel:${doctor.phone.replace(/\s/g, "")}`}>{doctor.phone}</a>
+      <a href={`mailto:${doctor.email}`}>{doctor.email}</a>
+      <span>{doctor.address}</span>
+    </div>
+    <div>
+      <h3>Sígueme</h3>
+      <div class="socials">
+        <a href={doctor.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        <a href={doctor.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href={doctor.socials.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      </div>
+      <p class="privacy-copy"><b>Aviso de privacidad</b><br />Tus datos se utilizan únicamente para atender tu solicitud de contacto y no se comparten con terceros.</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {new Date().getFullYear()} {doctor.name}. Todos los derechos reservados.</span>
+    <span>La información de este sitio no sustituye una consulta médica.</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-top: 70px;
+    color: rgba(255,255,255,.64);
+    background: #041421;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.35fr .65fr 1fr 1fr;
+    gap: 46px;
+    padding-bottom: 55px;
+  }
+
+  .mark {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+  }
+
+  h2 {
+    margin: 0;
+    color: #fff;
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .footer-brand > p {
+    margin: 2px 0 13px;
+    color: #8be2d7;
+    font-size: .69rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .footer-brand small {
+    max-width: 280px;
+    display: block;
+  }
+
+  h3 {
+    margin: 0 0 17px;
+    color: #fff;
+    font-size: .77rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .footer-main > div > a,
+  .footer-main > div > span {
+    display: block;
+    margin: 9px 0;
+    font-size: .83rem;
+  }
+
+  .footer-main a:hover {
+    color: #fff;
+  }
+
+  .socials {
+    display: flex;
+    gap: 8px;
+  }
+
+  .socials a {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 50%;
+    font-size: .75rem;
+    font-weight: 800;
+  }
+
+  .privacy-copy {
+    max-width: 260px;
+    margin-top: 18px;
+    font-size: .72rem;
+    line-height: 1.55;
+  }
+
+  .privacy-copy b {
+    color: rgba(255,255,255,.85);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 22px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    font-size: .7rem;
+  }
+
+  @media (max-width: 850px) {
+    .footer-main {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+    }
+  }
+</style>

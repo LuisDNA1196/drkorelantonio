@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+import { getImage } from "astro:assets";
+import heroImage from "../assets/surgeon-hero.png";
+import { doctor } from "../config/doctor";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${doctor.name} | ${doctor.specialty} en CDMX`,
+  description = doctor.tagline,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, doctor.siteUrl);
+const socialImage = await getImage({
+  src: heroImage,
+  width: 1200,
+  height: 630,
+  fit: "cover",
+  format: "jpg",
+  quality: 82,
+});
+const socialImageUrl = new URL(socialImage.src, doctor.siteUrl);
+
+const physicianSchema = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  name: doctor.name,
+  medicalSpecialty: "Surgery",
+  description,
+  url: doctor.siteUrl,
+  telephone: doctor.phone,
+  email: doctor.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: doctor.address,
+    addressLocality: "Ciudad de México",
+    addressCountry: "MX",
+  },
+  sameAs: Object.values(doctor.socials),
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#0a2740" />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="cirujano general, cirugía laparoscópica, hernias, vesícula, cirugía gastrointestinal, cirujano CDMX"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content={`Retrato profesional de ${doctor.name}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <title>{title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
