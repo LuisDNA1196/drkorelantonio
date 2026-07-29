@@ -53,13 +53,13 @@ export const doctor: DoctorConfig = {
     "Asociación Mexicana de Cirugía General",
     "Alta especialidad en cirugía laparoscópica",
   ],
-  address: "Av. Ejército Nacional 613, Granada, Miguel Hidalgo, CDMX",
-  phone: "+52 55 1234 5678",
-  whatsapp: "525512345678",
+  address: "Hospital Angeles Andares, Consultorio 1825B, Av. Patria 1355-Piso 18, Puerta de Hierro, 45116 Zapopan, Jal.",
+  phone: "+52  33 1605 4777",
+  whatsapp: "523316054777",
   email: "consulta@drkorel.mx",
   schedule: ["Lunes a viernes · 09:00–19:00", "Sábado · 09:00–14:00"],
   socials: {
-    instagram: "https://instagram.com/",
+    instagram: "https://www.instagram.com/dr.korel/",
     facebook: "https://facebook.com/",
     linkedin: "https://linkedin.com/",
   },
@@ -144,10 +144,9 @@ export const doctor: DoctorConfig = {
     },
   ],
   mapEmbedUrl:
-    "https://www.google.com/maps?q=Av.%20Ej%C3%A9rcito%20Nacional%20613%2C%20Granada%2C%20CDMX&output=embed",
+    "https://www.google.com/maps?q=Hospital%20Angeles%20Andares%2C%20Consultorio%201825B%2C%20Av.%20Patria%201355%2C%20Piso%2018%2C%20Puerta%20de%20Hierro%2C%2045116%20Zapopan%2C%20Jal.&output=embed",
   siteUrl: "https://www.drkorel.mx",
 };
 
 export const whatsappUrl = (message = "Hola, quiero agendar una consulta.") =>
   `https://wa.me/${doctor.whatsapp}?text=${encodeURIComponent(message)}`;
-

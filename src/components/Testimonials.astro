@@ -1,15 +1,12 @@
 ---
-import { getImage } from "astro:assets";
 import { doctor } from "../config/doctor";
-import portraits from "../assets/patient-portraits.png";
 
-const optimizedPortraits = await getImage({
-  src: portraits,
-  width: 1500,
-  format: "webp",
-  quality: 80,
-});
-const portraitsUrl = optimizedPortraits.src;
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .slice(0, 2)
+    .map((part) => part.charAt(0))
+    .join("");
 ---
 
 <section class="section testimonials" id="testimonios" aria-labelledby="testimonials-title">
@@ -29,7 +26,7 @@ const portraitsUrl = optimizedPortraits.src;
       <div class="slider-track" data-track>
         {doctor.testimonials.map((testimonial, index) => (
           <article class="testimonial-card" aria-label={`Testimonio ${index + 1} de ${doctor.testimonials.length}`}>
-            <div class={`patient-photo ${testimonial.photoPosition}`} style={`--portraits:url(${portraitsUrl})`} role="img" aria-label={`Fotografía de ${testimonial.name}`}></div>
+            <div class="patient-initials" aria-hidden="true">{initials(testimonial.name)}</div>
             <div class="stars" aria-label={`${testimonial.rating} de 5 estrellas`}>
               {"★".repeat(testimonial.rating)}
             </div>
@@ -96,20 +93,19 @@ const portraitsUrl = optimizedPortraits.src;
     box-shadow: 0 14px 44px rgba(7,29,47,.06);
   }
 
-  .patient-photo {
+  .patient-initials {
     width: 62px;
     height: 62px;
-    border: 3px solid #fff;
+    display: grid;
+    place-items: center;
     border-radius: 50%;
-    background-image: var(--portraits);
-    background-repeat: no-repeat;
-    background-size: 300% 100%;
-    box-shadow: 0 0 0 1px var(--line);
+    color: var(--teal-600);
+    border: 1px solid rgba(13, 129, 126, .16);
+    background: var(--teal-100);
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    letter-spacing: .04em;
   }
-
-  .patient-photo.left { background-position: left center; }
-  .patient-photo.center { background-position: center center; }
-  .patient-photo.right { background-position: right center; }
 
   .stars {
     margin-top: 24px;

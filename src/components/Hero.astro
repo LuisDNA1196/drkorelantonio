@@ -1,16 +1,16 @@
 ---
 import { Image } from "astro:assets";
-import heroImage from "../assets/surgeon-hero.png";
+import heroImage from "../assets/doctor-korel-hero.jpg";
 import { doctor, whatsappUrl } from "../config/doctor";
 ---
 
 <section class="hero" id="inicio" aria-labelledby="hero-title">
   <Image
     src={heroImage}
-    alt={`Retrato profesional de ${doctor.name} en un entorno hospitalario`}
+    alt={`${doctor.name} realizando una cirugía en quirófano`}
     class="hero-image"
-    width={2048}
-    height={1024}
+    width={1600}
+    height={1280}
     format="webp"
     quality={84}
     loading="eager"
@@ -52,14 +52,14 @@ import { doctor, whatsappUrl } from "../config/doctor";
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 66% center;
+    object-position: 62% center;
   }
 
   .hero-overlay {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(3, 17, 29, 0.92) 0%, rgba(3, 17, 29, 0.78) 40%, rgba(3, 17, 29, 0.1) 74%),
+      linear-gradient(90deg, rgba(3, 17, 29, 0.96) 0%, rgba(3, 17, 29, 0.82) 42%, rgba(3, 17, 29, 0.2) 76%),
       linear-gradient(0deg, rgba(3, 17, 29, 0.62) 0%, transparent 38%);
   }
 
@@ -166,8 +166,8 @@ import { doctor, whatsappUrl } from "../config/doctor";
     }
 
     :global(.hero-image) {
-      object-position: 63% center;
-      opacity: .73;
+      object-position: 56% center;
+      opacity: .78;
     }
 
     .hero-overlay {

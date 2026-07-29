@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import { getImage } from "astro:assets";
-import heroImage from "../assets/surgeon-hero.png";
+import heroImage from "../assets/doctor-korel-hero.jpg";
 import { doctor } from "../config/doctor";
 
 interface Props {
@@ -62,7 +62,7 @@ const physicianSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImageUrl} />
-    <meta property="og:image:alt" content={`Retrato profesional de ${doctor.name}`} />
+    <meta property="og:image:alt" content={`${doctor.name} durante una cirugía en quirófano`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

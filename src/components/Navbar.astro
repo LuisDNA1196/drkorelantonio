@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import logoBlue from "../assets/logo-korel-blue.png";
+import logoWhite from "../assets/logo-korel-white.png";
 import { doctor, whatsappUrl } from "../config/doctor";
 
 const links = [
@@ -13,8 +16,26 @@ const links = [
 <header class="navbar" data-navbar>
   <div class="container nav-inner">
     <a class="brand" href="#inicio" aria-label={`${doctor.name}, ir al inicio`}>
-      <span class="brand-mark" aria-hidden="true">K</span>
-      <span><b>{doctor.name}</b><small>{doctor.specialty}</small></span>
+      <Image
+        src={logoWhite}
+        alt=""
+        class="brand-logo brand-logo-light"
+        width={560}
+        height={120}
+        format="webp"
+        quality={90}
+        loading="eager"
+      />
+      <Image
+        src={logoBlue}
+        alt={`${doctor.name}, ${doctor.specialty}`}
+        class="brand-logo brand-logo-dark"
+        width={560}
+        height={120}
+        format="webp"
+        quality={90}
+        loading="eager"
+      />
     </a>
 
     <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
@@ -56,45 +77,33 @@ const links = [
   }
 
   .brand {
+    position: relative;
+    width: 280px;
+    height: 58px;
     display: flex;
     align-items: center;
-    gap: 11px;
   }
 
-  .brand-mark {
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
-    font-family: Georgia, serif;
-    font-size: 1.3rem;
+  .brand :global(.brand-logo) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+    transition: opacity 200ms ease;
   }
 
-  .scrolled .brand-mark {
-    color: var(--teal-600);
-    border-color: var(--teal-600);
+  .brand :global(.brand-logo-dark) {
+    opacity: 0;
   }
 
-  .brand b,
-  .brand small {
-    display: block;
-    line-height: 1.2;
+  .scrolled .brand :global(.brand-logo-light) {
+    opacity: 0;
   }
 
-  .brand b {
-    font-family: Georgia, serif;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  .brand small {
-    margin-top: 3px;
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    opacity: 0.72;
-    text-transform: uppercase;
+  .scrolled .brand :global(.brand-logo-dark) {
+    opacity: 1;
   }
 
   .nav-menu {
@@ -156,6 +165,11 @@ const links = [
       display: block;
     }
 
+    .brand {
+      width: 230px;
+      height: 48px;
+    }
+
     .nav-menu {
       position: fixed;
       inset: 72px 0 auto;
@@ -187,6 +201,12 @@ const links = [
 
     .nav-cta {
       margin-top: 12px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .brand {
+      width: 205px;
     }
   }
 </style>

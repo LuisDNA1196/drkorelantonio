@@ -1,13 +1,22 @@
 ---
+import { Image } from "astro:assets";
+import logoWhite from "../assets/logo-korel-white.png";
 import { doctor } from "../config/doctor";
 ---
 
 <footer class="footer" id="aviso-privacidad">
   <div class="container footer-main">
     <div class="footer-brand">
-      <span class="mark" aria-hidden="true">K</span>
-      <h2>{doctor.name}</h2>
-      <p>{doctor.specialty}</p>
+      <Image
+        src={logoWhite}
+        alt={`${doctor.name}, ${doctor.specialty}`}
+        class="footer-logo"
+        width={640}
+        height={160}
+        format="webp"
+        quality={90}
+        loading="lazy"
+      />
       <small>Atención quirúrgica con experiencia, claridad y sentido humano.</small>
     </div>
     <div>
@@ -53,34 +62,12 @@ import { doctor } from "../config/doctor";
     padding-bottom: 55px;
   }
 
-  .mark {
-    width: 46px;
-    height: 46px;
-    display: grid;
-    place-items: center;
-    margin-bottom: 18px;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,.3);
-    border-radius: 50%;
-    font-family: Georgia, serif;
-    font-size: 1.35rem;
-  }
-
-  h2 {
-    margin: 0;
-    color: #fff;
-    font-family: Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 500;
-  }
-
-  .footer-brand > p {
-    margin: 2px 0 13px;
-    color: #8be2d7;
-    font-size: .69rem;
-    font-weight: 800;
-    letter-spacing: .14em;
-    text-transform: uppercase;
+  .footer-brand :global(.footer-logo) {
+    width: min(100%, 320px);
+    height: 82px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    object-position: left center;
   }
 
   .footer-brand small {
