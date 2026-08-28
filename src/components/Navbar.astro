@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import logoBlue from "../assets/logo-korel-blue.png";
 import logoWhite from "../assets/logo-korel-white.png";
 import { doctor, whatsappUrl } from "../config/doctor";
 
@@ -18,18 +17,8 @@ const links = [
     <a class="brand" href="#inicio" aria-label={`${doctor.name}, ir al inicio`}>
       <Image
         src={logoWhite}
-        alt=""
-        class="brand-logo brand-logo-light"
-        width={560}
-        height={120}
-        format="webp"
-        quality={90}
-        loading="eager"
-      />
-      <Image
-        src={logoBlue}
         alt={`${doctor.name}, ${doctor.specialty}`}
-        class="brand-logo brand-logo-dark"
+        class="brand-logo"
         width={560}
         height={120}
         format="webp"
@@ -77,33 +66,32 @@ const links = [
   }
 
   .brand {
-    position: relative;
-    width: 280px;
-    height: 58px;
+    width: 270px;
+    height: 54px;
+    flex: 0 0 270px;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    transition: width 200ms ease, height 200ms ease, flex-basis 200ms ease;
   }
 
   .brand :global(.brand-logo) {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
+    display: block;
     object-fit: contain;
     object-position: left center;
-    transition: opacity 200ms ease;
+    transition: filter 200ms ease;
   }
 
-  .brand :global(.brand-logo-dark) {
-    opacity: 0;
+  .scrolled .brand {
+    width: 250px;
+    height: 48px;
+    flex-basis: 250px;
   }
 
-  .scrolled .brand :global(.brand-logo-light) {
-    opacity: 0;
-  }
-
-  .scrolled .brand :global(.brand-logo-dark) {
-    opacity: 1;
+  .scrolled .brand :global(.brand-logo) {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(54%) saturate(1651%) hue-rotate(188deg) brightness(84%) contrast(106%);
   }
 
   .nav-menu {
@@ -168,6 +156,13 @@ const links = [
     .brand {
       width: 230px;
       height: 48px;
+      flex-basis: 230px;
+    }
+
+    .scrolled .brand {
+      width: 230px;
+      height: 44px;
+      flex-basis: 230px;
     }
 
     .nav-menu {
@@ -207,6 +202,12 @@ const links = [
   @media (max-width: 390px) {
     .brand {
       width: 205px;
+      flex-basis: 205px;
+    }
+
+    .scrolled .brand {
+      width: 205px;
+      flex-basis: 205px;
     }
   }
 </style>
