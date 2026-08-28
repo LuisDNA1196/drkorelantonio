@@ -60,8 +60,8 @@ export const doctor: DoctorConfig = {
   schedule: ["Lunes a viernes · 09:00–19:00", "Sábado · 09:00–14:00"],
   socials: {
     instagram: "https://www.instagram.com/dr.korel/",
-    // facebook: "https://facebook.com/",
-    // linkedin: "https://linkedin.com/",
+    facebook: "https://facebook.com/",
+    linkedin: "https://linkedin.com/",
   },
   services: [
     {
