@@ -56,7 +56,7 @@ export const doctor: DoctorConfig = {
   address: "Hospital Angeles Andares, Consultorio 1825B, Av. Patria 1355-Piso 18, Puerta de Hierro, 45116 Zapopan, Jal.",
   phone: "+52  33 1605 4777",
   whatsapp: "523316054777",
-  email: "consulta@drkorel.mx",
+  email: "md.korel.hl@gmail.com",
   schedule: ["Lunes a viernes · 09:00–19:00", "Sábado · 09:00–14:00"],
   socials: {
     instagram: "https://www.instagram.com/dr.korel/",
@@ -142,7 +142,7 @@ export const doctor: DoctorConfig = {
     {
       question: "¿Dónde se encuentra el consultorio?",
       answer:
-        "Nos encontramos en Av. Ejército Nacional 613, colonia Granada, Miguel Hidalgo, Ciudad de México.",
+        "Hospital Angeles Andares, Consultorio 1825B, Av. Patria 1355-Piso 18, Puerta de Hierro, 45116 Zapopan, Jal.",
     },
   ],
   mapEmbedUrl:
