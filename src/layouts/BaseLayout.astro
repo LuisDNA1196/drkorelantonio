@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  title = `${doctor.name} | ${doctor.specialty} en CDMX`,
+  title = `${doctor.name} | ${doctor.specialty} en GDL`,
   description = doctor.tagline,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, doctor.siteUrl);
@@ -52,7 +52,7 @@ const physicianSchema = {
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="cirujano general, cirugía laparoscópica, hernias, vesícula, cirugía gastrointestinal, cirujano CDMX"
+      content="cirujano general, cirugía laparoscópica, hernias, vesícula, cirugía gastrointestinal, cirujano GDL"
     />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
