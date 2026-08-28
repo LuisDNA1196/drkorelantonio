@@ -1,16 +1,17 @@
 :root {
-  --navy-950: #071d2f;
-  --navy-900: #0a2740;
-  --navy-800: #103a58;
-  --teal-600: #0d817e;
-  --teal-500: #14a09b;
-  --teal-100: #dff4f1;
-  --sand-100: #f7f4ef;
+  --navy-950: #07132f;
+  --navy-900: #0b2558;
+  --navy-800: #183878;
+  --teal-600: #2455a5;
+  --teal-500: #4e78c8;
+  --teal-100: #dbe8fb;
+  --sand-100: #eef3fb;
+  --accent-light: #a8c5f2;
   --white: #ffffff;
-  --ink: #142633;
-  --muted: #62727c;
-  --line: #dbe4e8;
-  --shadow: 0 22px 70px rgba(7, 29, 47, 0.12);
+  --ink: #12214a;
+  --muted: #657397;
+  --line: #d8e2f1;
+  --shadow: 0 22px 70px rgba(14, 39, 91, 0.14);
   --radius: 22px;
   --dark-mode-ready: 0;
 }
@@ -132,19 +133,19 @@ img {
 summary:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(20, 160, 155, 0.4);
+  outline: 3px solid rgba(78, 120, 200, 0.42);
   outline-offset: 3px;
 }
 
 .button-primary {
   color: var(--white);
   background: var(--teal-600);
-  box-shadow: 0 12px 30px rgba(13, 129, 126, 0.28);
+  box-shadow: 0 12px 30px rgba(36, 85, 165, 0.3);
 }
 
 .button-primary:hover {
-  background: #0a716e;
-  box-shadow: 0 16px 34px rgba(13, 129, 126, 0.36);
+  background: #193f86;
+  box-shadow: 0 16px 34px rgba(36, 85, 165, 0.38);
 }
 
 .button-light {

@@ -20,7 +20,7 @@ import { doctor, whatsappUrl } from "../config/doctor";
   <div class="container hero-inner">
     <div class="hero-content">
       <span class="hero-badge"><span aria-hidden="true">✓</span> Atención personalizada</span>
-      <p class="eyebrow">{doctor.specialty} · CDMX</p>
+      <p class="eyebrow">{doctor.specialty} · Guadalajara</p>
       <h1 id="hero-title">{doctor.name}</h1>
       <p class="hero-copy">{doctor.tagline}</p>
       <div class="hero-actions">
@@ -59,8 +59,8 @@ import { doctor, whatsappUrl } from "../config/doctor";
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(3, 17, 29, 0.96) 0%, rgba(3, 17, 29, 0.82) 42%, rgba(3, 17, 29, 0.2) 76%),
-      linear-gradient(0deg, rgba(3, 17, 29, 0.62) 0%, transparent 38%);
+      linear-gradient(90deg, rgba(7, 19, 47, 0.97) 0%, rgba(11, 37, 88, 0.84) 42%, rgba(24, 56, 120, 0.2) 76%),
+      linear-gradient(0deg, rgba(7, 19, 47, 0.68) 0%, transparent 38%);
   }
 
   .hero-inner {
@@ -89,12 +89,12 @@ import { doctor, whatsappUrl } from "../config/doctor";
   }
 
   .hero-badge span {
-    color: #8be2d7;
+    color: var(--accent-light);
   }
 
   .eyebrow {
     margin: 0 0 12px;
-    color: #9ae4dc;
+    color: #b7d0f6;
     font-size: .8rem;
     font-weight: 800;
     letter-spacing: .16em;
@@ -171,7 +171,7 @@ import { doctor, whatsappUrl } from "../config/doctor";
     }
 
     .hero-overlay {
-      background: linear-gradient(0deg, rgba(3,17,29,.96) 0%, rgba(3,17,29,.7) 56%, rgba(3,17,29,.4) 100%);
+      background: linear-gradient(0deg, rgba(7,19,47,.97) 0%, rgba(11,37,88,.74) 56%, rgba(24,56,120,.42) 100%);
     }
 
     .hero-inner {

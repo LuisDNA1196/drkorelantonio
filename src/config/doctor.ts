@@ -40,18 +40,18 @@ export interface DoctorConfig {
 }
 
 export const doctor: DoctorConfig = {
-  name: "Dr.  Korel",
+  name: "Dr.  Korel Hernandez",
   firstName: "",
   specialty: "Cirujano General",
   tagline:
     "Atención quirúrgica segura, ética y personalizada para brindarte la mejor solución.",
   bio: "Mi compromiso es acompañarte con claridad desde la primera consulta hasta tu recuperación. Combino experiencia quirúrgica, técnicas de mínima invasión y un trato cercano para que tomes decisiones informadas y seguras.",
   experienceYears: 3,
-  hospitals: ["Hospital Ángeles", "Centro Médico ABC"],
+  hospitals: ["Hospital Ángeles Andares"],
   certifications: [
     "Consejo Mexicano de Cirugía General",
     "Asociación Mexicana de Cirugía General",
-    "Alta especialidad en cirugía laparoscópica",
+
   ],
   address: "Hospital Angeles Andares, Consultorio 1825B, Av. Patria 1355-Piso 18, Puerta de Hierro, 45116 Zapopan, Jal.",
   phone: "+52  33 1605 4777",
@@ -60,19 +60,25 @@ export const doctor: DoctorConfig = {
   schedule: ["Lunes a viernes · 09:00–19:00", "Sábado · 09:00–14:00"],
   socials: {
     instagram: "https://www.instagram.com/dr.korel/",
-    facebook: "https://facebook.com/",
-    linkedin: "https://linkedin.com/",
+    // facebook: "https://facebook.com/",
+    // linkedin: "https://linkedin.com/",
   },
   services: [
     {
-      icon: "◌",
-      title: "Cirugía laparoscópica",
-      description: "Procedimientos de mínima invasión para una recuperación más ágil y menor dolor.",
+      icon: "✦",
+      title: "Consulta de primera vez",
+      description: "Evaluación integral, diagnóstico claro y un plan de tratamiento hecho para ti.",
     },
     {
       icon: "◇",
       title: "Hernias",
       description: "Diagnóstico y reparación de hernias inguinales, umbilicales y de pared abdominal.",
+    },
+    {
+      icon: "◌",
+      title: "Cirugía de mínima invasión",
+      description:
+        "Procedimientos laparoscópicos cuando están indicados, con incisiones más pequeñas.",
     },
     {
       icon: "◒",
@@ -81,18 +87,14 @@ export const doctor: DoctorConfig = {
     },
     {
       icon: "⌁",
-      title: "Apendicitis",
-      description: "Atención oportuna y resolución quirúrgica segura ante cuadros de urgencia.",
+      title: "Lipomas y lesiones de piel",
+      description:
+        "Valoración y retiro de lipomas, quistes y otras lesiones de tejidos superficiales.",
     },
     {
       icon: "◎",
       title: "Cirugía gastrointestinal",
-      description: "Tratamiento especializado de padecimientos del aparato digestivo.",
-    },
-    {
-      icon: "✦",
-      title: "Consulta de valoración",
-      description: "Evaluación integral, diagnóstico claro y un plan de tratamiento hecho para ti.",
+      description: "Valoración y tratamiento quirúrgico de enfermedades del estómago e intestino.",
     },
   ],
   testimonials: [

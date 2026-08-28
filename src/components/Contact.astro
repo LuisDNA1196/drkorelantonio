@@ -88,12 +88,12 @@ import { doctor } from "../config/doctor";
     padding: clamp(34px, 6vw, 66px);
     color: #fff;
     background:
-      radial-gradient(circle at 10% 100%, rgba(20,160,155,.28), transparent 42%),
+      radial-gradient(circle at 10% 100%, rgba(78,120,200,.34), transparent 42%),
       var(--navy-950);
   }
 
   .contact-info :global(.section-label) {
-    color: #8be2d7;
+    color: var(--accent-light);
   }
 
   .contact-info :global(.section-title) {
@@ -123,7 +123,7 @@ import { doctor } from "../config/doctor";
     flex: 0 0 38px;
     display: grid;
     place-items: center;
-    color: #8be2d7;
+    color: var(--accent-light);
     border: 1px solid rgba(255,255,255,.16);
     border-radius: 50%;
   }
@@ -177,7 +177,7 @@ import { doctor } from "../config/doctor";
     color: var(--ink);
     border: 1px solid var(--line);
     border-radius: 10px;
-    background: #fbfcfc;
+    background: #f7f9fd;
     transition: border-color 180ms ease, box-shadow 180ms ease;
   }
 
@@ -190,7 +190,7 @@ import { doctor } from "../config/doctor";
   select:focus,
   textarea:focus {
     border-color: var(--teal-500);
-    box-shadow: 0 0 0 4px rgba(20,160,155,.08);
+    box-shadow: 0 0 0 4px rgba(78,120,200,.1);
   }
 
   input.invalid,
@@ -246,7 +246,7 @@ import { doctor } from "../config/doctor";
     margin-top: 28px;
     overflow: hidden;
     border-radius: 22px;
-    background: #dce5e7;
+    background: #dbe4f1;
   }
 
   iframe {
