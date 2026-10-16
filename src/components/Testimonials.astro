@@ -22,7 +22,12 @@ const initials = (name: string) =>
       </div>
     </div>
 
-    <div class="slider" data-slider>
+    <div
+      class="slider"
+      data-slider
+      tabindex="0"
+      aria-label="Carrusel de testimonios. Usa las flechas izquierda y derecha para navegar."
+    >
       <div class="slider-track" data-track>
         {doctor.testimonials.map((testimonial, index) => (
           <article class="testimonial-card" aria-label={`Testimonio ${index + 1} de ${doctor.testimonials.length}`}>
@@ -31,15 +36,28 @@ const initials = (name: string) =>
               {"★".repeat(testimonial.rating)}
             </div>
             <blockquote>“{testimonial.comment}”</blockquote>
-            <footer><b>{testimonial.name}</b><span>{testimonial.treatment}</span></footer>
+            <footer><b>{testimonial.name}</b><span>{testimonial.category}</span></footer>
           </article>
         ))}
       </div>
       <div class="dots" aria-label="Seleccionar testimonio">
         {doctor.testimonials.map((_, index) => (
-          <button type="button" class:list={{ active: index === 0 }} aria-label={`Ir al testimonio ${index + 1}`} data-dot={index}></button>
+          <button
+            type="button"
+            class:list={{ active: index === 0 }}
+            aria-label={`Ir al testimonio ${index + 1}`}
+            aria-current={index === 0 ? "true" : undefined}
+            data-dot={index}
+          ></button>
         ))}
       </div>
+    </div>
+    <div class="reviews-source reveal">
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Dr.%20Korel%20A.%20Hern%C3%A1ndez%20L%C3%B3pez&query_place_id=ChIJyUu94BavKIQRx9_rVPng024"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Ver todas las opiniones en Google Maps ↗</a>
     </div>
   </div>
 </section>
@@ -59,7 +77,7 @@ const initials = (name: string) =>
   }
 
   .slider-controls {
-    display: none;
+    display: flex;
     gap: 9px;
   }
 
@@ -79,14 +97,30 @@ const initials = (name: string) =>
     background: var(--navy-900);
   }
 
+  .slider {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .slider:focus-visible {
+    outline: 3px solid rgba(78, 120, 200, .34);
+    outline-offset: 7px;
+  }
+
   .slider-track {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    align-items: stretch;
     gap: 18px;
-    transition: transform 350ms ease;
+    will-change: transform;
+    transition: transform 400ms ease;
   }
 
   .testimonial-card {
+    min-width: calc((100% - 36px) / 3);
+    flex: 0 0 calc((100% - 36px) / 3);
+    display: flex;
+    flex-direction: column;
     padding: 30px;
     border-radius: 20px;
     background: #fff;
@@ -115,7 +149,8 @@ const initials = (name: string) =>
   }
 
   blockquote {
-    min-height: 112px;
+    min-height: 0;
+    flex: 1;
     margin: 14px 0 26px;
     color: var(--navy-950);
     font-family: Georgia, serif;
@@ -135,8 +170,29 @@ const initials = (name: string) =>
   }
 
   footer span {
+    margin-top: 3px;
     color: var(--muted);
     font-size: .78rem;
+    line-height: 1.45;
+  }
+
+  .reviews-source {
+    display: flex;
+    justify-content: center;
+    margin-top: 34px;
+  }
+
+  .reviews-source a {
+    color: var(--navy-900);
+    border-bottom: 1px solid rgba(36, 85, 165, .34);
+    font-size: .88rem;
+    font-weight: 750;
+    transition: color 180ms ease, border-color 180ms ease;
+  }
+
+  .reviews-source a:hover {
+    color: var(--teal-600);
+    border-color: currentColor;
   }
 
   .dots {
@@ -170,17 +226,13 @@ const initials = (name: string) =>
       overflow: hidden;
     }
 
-    .slider-controls {
-      display: flex;
-    }
-
     .slider-track {
-      display: flex;
       gap: 0;
     }
 
     .testimonial-card {
       min-width: 100%;
+      flex-basis: 100%;
     }
 
     .dots {
@@ -198,27 +250,159 @@ const initials = (name: string) =>
 <script>
   const slider = document.querySelector<HTMLElement>("[data-slider]");
   const track = slider?.querySelector<HTMLElement>("[data-track]");
-  const cards = slider?.querySelectorAll<HTMLElement>(".testimonial-card");
+  const originalCards = track
+    ? Array.from(track.querySelectorAll<HTMLElement>(".testimonial-card"))
+    : [];
   const dots = slider?.querySelectorAll<HTMLButtonElement>("[data-dot]");
   let current = 0;
+  let desktopPosition = 0;
+  let desktopMode = false;
+  let animating = false;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let settleTimer: number | undefined;
 
-  const update = () => {
-    if (!track || window.innerWidth > 760) return;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dots?.forEach((dot, index) => dot.classList.toggle("active", index === current));
+  const isDesktop = () => window.innerWidth > 760;
+
+  const updateDots = () => {
+    dots?.forEach((dot, index) => {
+      const active = index === current;
+      dot.classList.toggle("active", active);
+      if (active) dot.setAttribute("aria-current", "true");
+      else dot.removeAttribute("aria-current");
+    });
+  };
+
+  const removeClones = () => {
+    track?.querySelectorAll("[data-clone]").forEach((clone) => clone.remove());
+  };
+
+  const cloneCard = (card: HTMLElement) => {
+    const clone = card.cloneNode(true) as HTMLElement;
+    clone.dataset.clone = "true";
+    clone.setAttribute("aria-hidden", "true");
+    clone.removeAttribute("aria-label");
+    return clone;
+  };
+
+  const cardStep = () => {
+    if (!track || !originalCards[0]) return 0;
+    const styles = getComputedStyle(track);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+    return originalCards[0].getBoundingClientRect().width + gap;
+  };
+
+  const setDesktopPosition = (position: number, animate: boolean) => {
+    if (!track) return;
+    if (!animate) track.style.transition = "none";
+    track.style.transform = `translate3d(-${position * cardStep()}px, 0, 0)`;
+    if (!animate) {
+      track.getBoundingClientRect();
+      track.style.transition = "";
+    }
+  };
+
+  const finishDesktopMove = () => {
+    if (!desktopMode || !track || !animating) return;
+    window.clearTimeout(settleTimer);
+    animating = false;
+    const cloneCount = Math.min(3, originalCards.length);
+    if (desktopPosition >= cloneCount + originalCards.length) {
+      desktopPosition -= originalCards.length;
+      setDesktopPosition(desktopPosition, false);
+    } else if (desktopPosition < cloneCount) {
+      desktopPosition += originalCards.length;
+      setDesktopPosition(desktopPosition, false);
+    }
+  };
+
+  const setup = () => {
+    if (!track || !originalCards.length) return;
+    window.clearTimeout(settleTimer);
+    animating = false;
+    removeClones();
+    desktopMode = isDesktop();
+
+    if (desktopMode) {
+      const cloneCount = Math.min(3, originalCards.length);
+      const leading = document.createDocumentFragment();
+      const trailing = document.createDocumentFragment();
+      originalCards.slice(-cloneCount).forEach((card) => leading.append(cloneCard(card)));
+      originalCards.slice(0, cloneCount).forEach((card) => trailing.append(cloneCard(card)));
+      track.prepend(leading);
+      track.append(trailing);
+      desktopPosition = cloneCount + current;
+      setDesktopPosition(desktopPosition, false);
+    } else {
+      track.style.transition = "none";
+      track.style.transform = `translate3d(-${current * 100}%, 0, 0)`;
+      track.getBoundingClientRect();
+      track.style.transition = "";
+    }
+
+    updateDots();
   };
 
   const move = (direction: number) => {
-    if (!cards?.length) return;
-    current = (current + direction + cards.length) % cards.length;
-    update();
+    if (!track || !originalCards.length || animating) return;
+    current = (current + direction + originalCards.length) % originalCards.length;
+    updateDots();
+
+    if (desktopMode) {
+      animating = true;
+      desktopPosition += direction;
+      setDesktopPosition(desktopPosition, true);
+      settleTimer = window.setTimeout(finishDesktopMove, 460);
+    } else {
+      track.style.transform = `translate3d(-${current * 100}%, 0, 0)`;
+    }
   };
 
   document.querySelector("[data-prev]")?.addEventListener("click", () => move(-1));
   document.querySelector("[data-next]")?.addEventListener("click", () => move(1));
   dots?.forEach((dot) => dot.addEventListener("click", () => {
     current = Number(dot.dataset.dot);
-    update();
+    if (track && !desktopMode) {
+      track.style.transform = `translate3d(-${current * 100}%, 0, 0)`;
+    }
+    updateDots();
   }));
-  window.addEventListener("resize", update, { passive: true });
+
+  track?.addEventListener("transitionend", (event) => {
+    if (event.propertyName === "transform") finishDesktopMove();
+  });
+
+  slider?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      move(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      move(1);
+    }
+  });
+
+  slider?.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0]?.clientX ?? 0;
+    touchStartY = event.changedTouches[0]?.clientY ?? 0;
+  }, { passive: true });
+
+  slider?.addEventListener("touchend", (event) => {
+    if (desktopMode) return;
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+    const touchEndY = event.changedTouches[0]?.clientY ?? touchStartY;
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+    move(deltaX > 0 ? -1 : 1);
+  }, { passive: true });
+
+  let resizeFrame = 0;
+  window.addEventListener("resize", () => {
+    window.cancelAnimationFrame(resizeFrame);
+    resizeFrame = window.requestAnimationFrame(setup);
+  }, { passive: true });
+
+  setup();
 </script>

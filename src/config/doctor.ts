@@ -6,10 +6,9 @@ export interface Service {
 
 export interface Testimonial {
   name: string;
-  treatment: string;
+  category: string;
   comment: string;
   rating: number;
-  photoPosition: "left" | "center" | "right";
 }
 
 export interface FAQ {
@@ -99,28 +98,39 @@ export const doctor: DoctorConfig = {
   ],
   testimonials: [
     {
-      name: "Mariana López",
-      treatment: "Cirugía de vesícula",
+      name: "Eduardo Navarro Lozano",
+      category: "Experiencia quirúrgica y satisfacción",
       comment:
-        "Desde la primera consulta me explicó todo con mucha claridad. La cirugía y mi recuperación fueron mejor de lo que esperaba.",
+        "El Dr Korel peca de agradable, servicial y profesional. Estoy muy satisfecho con su atención, me operó de la vesícula y me cambió la vida. Gracias a Dios por ponerlo en mi camino.",
       rating: 5,
-      photoPosition: "left",
     },
     {
-      name: "Roberto Hernández",
-      treatment: "Reparación de hernia",
+      name: "Fernanda Borruel",
+      category: "Empatía y claridad en el diagnóstico",
       comment:
-        "Excelente trato y seguimiento. Siempre tuve respuesta a mis dudas y regresé a mis actividades muy pronto.",
+        "Doctor, ¡muchísimas gracias por su increíble trabajo! Su explicación de mi diagnóstico y la atención a todas mis preguntas hicieron toda la diferencia. Se agradece enormemente su empatía y profesionalismo. 🫶🏻",
       rating: 5,
-      photoPosition: "center",
     },
     {
-      name: "Claudia Méndez",
-      treatment: "Consulta de valoración",
+      name: "Fer Aguilar",
+      category: "Confianza durante el proceso quirúrgico",
       comment:
-        "Me sentí escuchada y en confianza. Recibí un diagnóstico preciso y opciones explicadas sin prisas.",
+        "Una excelente persona y cirujano, en todo momento me explicó todo muy claro, resolvió cada una de mis dudas!! Sin duda me volvería a operar con él Dr",
       rating: 5,
-      photoPosition: "right",
+    },
+    {
+      name: "Jhair Córdova",
+      category: "Profesionalismo y calidad humana",
+      comment:
+        "Excelente médico y excelente cirujano. Gran calidad humana, profesionalismo y compromiso con sus pacientes. Sin duda, ampliamente recomendado.",
+      rating: 5,
+    },
+    {
+      name: "Jesús Mora",
+      category: "Seguridad y atención ante una preocupación médica",
+      comment:
+        "Excelente doctor, tenía miedo por un dolor muy fuerte en la parte baja del estomago y en consulta se soluciono todo",
+      rating: 5,
     },
   ],
   faqs: [
