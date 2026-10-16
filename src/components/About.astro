@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import portraitImage from "../assets/doctor-korel-portrait.jpg";
+import portraitImage from "../../assets/WhatsApp Image 2026-08-25 at 3.53.47 PM.jpeg";
 import { doctor } from "../config/doctor";
 ---
 
@@ -9,7 +9,7 @@ import { doctor } from "../config/doctor";
     <div class="portrait reveal">
       <Image
         src={portraitImage}
-        alt={`${doctor.name}, ${doctor.specialty}, en quirófano`}
+        alt={`Retrato profesional de ${doctor.name}, ${doctor.specialty}`}
         width={790}
         height={920}
         format="webp"
@@ -65,7 +65,7 @@ import { doctor } from "../config/doctor";
     height: 600px;
     border-radius: var(--radius);
     object-fit: cover;
-    object-position: 50% 36%;
+    object-position: 50% 38%;
     box-shadow: var(--shadow);
   }
 
@@ -161,6 +161,7 @@ import { doctor } from "../config/doctor";
 
     .portrait :global(img) {
       height: 470px;
+      object-position: 50% 32%;
     }
   }
 </style>
