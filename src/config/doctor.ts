@@ -47,7 +47,7 @@ export const doctor: DoctorConfig = {
     "Atención quirúrgica segura, ética y personalizada para brindarte la mejor solución.",
   bio: "Mi compromiso es acompañarte con claridad desde la primera consulta hasta tu recuperación. Combino experiencia quirúrgica, técnicas de mínima invasión y un trato cercano para que tomes decisiones informadas y seguras.",
   // experienceYears: 3,
-  hospitals: ["Hospital Ángeles Andares"],
+  hospitals: ["Zona Metropolitana de Guadalajara"],
   certifications: [
     "Consejo Mexicano de Cirugía General",
     "Asociación Mexicana de Cirugía General",
