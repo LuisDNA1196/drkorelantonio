@@ -147,7 +147,7 @@ export const doctor: DoctorConfig = {
   ],
   mapEmbedUrl:
     "https://www.google.com/maps?q=Hospital%20Angeles%20Andares%2C%20Consultorio%201825B%2C%20Av.%20Patria%201355%2C%20Piso%2018%2C%20Puerta%20de%20Hierro%2C%2045116%20Zapopan%2C%20Jal.&output=embed",
-  siteUrl: "https://www.drkorel.mx",
+  siteUrl: "https://drkorelhernandez.com/",
 };
 
 export const whatsappUrl = (message = "Hola, quiero agendar una consulta.") =>

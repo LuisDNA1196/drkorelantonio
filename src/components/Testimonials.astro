@@ -36,7 +36,11 @@ const initials = (name: string) =>
               {"★".repeat(testimonial.rating)}
             </div>
             <blockquote>“{testimonial.comment}”</blockquote>
-            <footer><b>{testimonial.name}</b><span>{testimonial.category}</span></footer>
+
+<footer>
+  <b>{testimonial.name}</b>
+  <span>{testimonial.treatment}</span>
+</footer>
           </article>
         ))}
       </div>
