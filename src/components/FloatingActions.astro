@@ -6,7 +6,8 @@ import { doctor, whatsappUrl } from "../config/doctor";
   <a class="call" href={`tel:${doctor.phone.replace(/\s/g, "")}`} aria-label="Llamar al consultorio">
     <span aria-hidden="true">☎</span>
   </a>
-  <a class="whatsapp" href={whatsappUrl()} target="_blank" rel="noopener" aria-label="Agendar por WhatsApp">
+  
+<a  class="whatsapp"  data-whatsapp-conversion  href={whatsappUrl()}  target="_blank"  rel="noopener"  aria-label="Agendar por WhatsApp">
     <span aria-hidden="true">◉</span><b>WhatsApp</b>
   </a>
   <button class="back-top" type="button" aria-label="Volver arriba" data-back-top>↑</button>
