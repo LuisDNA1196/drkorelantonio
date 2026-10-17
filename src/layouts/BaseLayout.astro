@@ -81,5 +81,16 @@ const physicianSchema = {
   </head>
   <body>
     <slot />
+<script is:inline>
+  document.addEventListener('click', function(event) {
+    const link = event.target.closest('a[data-whatsapp-conversion]');
+
+    if (!link || typeof window.gtag !== 'function') return;
+
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-18511647240/FhsMCP6XpaAdEIikhftE'
+    });
+  });
+</script>
   </body>
 </html>
